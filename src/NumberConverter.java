@@ -15,13 +15,12 @@ public class NumberConverter {
         this.base = base;
     }
 
-    public String displayOriginalNumber() {
+    public int displayOriginalNumber() {
         String o = "";
         for (int i = 0; i < digits.length; i++) {
             o = o + digits[i];
         }
-        o = o + "\n";
-        return o;
+        return Integer.parseInt(o);
     }
 
     public int[] getDigits() {
@@ -36,6 +35,12 @@ public class NumberConverter {
     //???
     //separate into array
     public int[] convertToDecimal() {
+        int[] digitsTemp = getDigits();
+        int temp = 0;
+        for (int i = 0; i < digitsTemp.length; i++) {
+            temp += Math.pow(8, digitsTemp[i]-1);
+        }
+
         return null;
     }
 
@@ -43,7 +48,26 @@ public class NumberConverter {
     //start with left most and work across?
 
     public int[] convertToBinary() {
+        int temp = displayOriginalNumber();
+        int power = 0;
+        int[] bin;
+        if (base != 2) {
+            if (base != 10) {
+                temp = convertToDecimal();
+            }
+            while (Math.pow(2, power) <= displayOriginalNumber()) {
+                power += 1;
+            }
+            bin = new int[power];
+            int i = 0;
+            while (temp > 0) {
+                bin[bin.length-1-i] = temp % 2;
+                temp /= 2;
+                i++;
+            }
+            return bin;
 
+        }
         return null;
     }
 
