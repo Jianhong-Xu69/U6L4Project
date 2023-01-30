@@ -68,7 +68,7 @@ public class NumberConverter {
             if (base != 10) {
                 temp = displayNumber(convertToDecimal(base));
             }
-            while (Math.pow(base, power) <= displayNumber(digits)) {
+            while (Math.pow(convertTo, power) <= displayNumber(digits)) {
                 power++;
             }
             any = new int[power];
