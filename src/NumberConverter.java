@@ -67,8 +67,10 @@ public class NumberConverter {
         if (base != convertTo) {
             if (base != 10) {
                 temp = displayNumber(convertToDecimal(base));
+                System.out.println("e");
+                System.out.println(temp);
             }
-            while (Math.pow(convertTo, power) <= displayNumber(digits)) {
+            while (Math.pow(convertTo, power) <= temp) {
                 power++;
             }
             any = new int[power];
