@@ -18,7 +18,7 @@ public class NumberConverter {
     public int displayNumber(int[] array) {
         String o = "";
         for (int i = 0; i < array.length; i++) {
-            o = o + array[i];
+            o += array[i];
         }
         return Integer.parseInt(o);
     }
@@ -60,11 +60,11 @@ public class NumberConverter {
     //use what base it is
     //start with left most and work across?
 
-    public int[] convertToAny(int base) {
+    public int[] convertToAny(int convertTo) {
         int temp = displayNumber(digits);
         int power = 0;
         int[] any;
-        if (this.base != base) {
+        if (base != convertTo) {
             if (base != 10) {
                 temp = displayNumber(convertToDecimal(base));
             }
@@ -74,9 +74,10 @@ public class NumberConverter {
             any = new int[power];
             power--;
             for (int i = 0; i < any.length; i++) {
-                any[i] = (int) (temp / Math.pow(base,power));
-                System.out.println((int) (temp / Math.pow(base,power)));
-                temp = temp - (int) (Math.pow(base,power));
+                any[i] = temp / (int) (Math.pow(convertTo,power));
+                System.out.println((int) (temp / Math.pow(convertTo,power)) + " times " + Math.pow(convertTo,power));
+                System.out.println("is" + temp / (Math.pow(convertTo,power)));
+                temp %= (int) (Math.pow(convertTo,power));
                 power--;
             }
             return any;

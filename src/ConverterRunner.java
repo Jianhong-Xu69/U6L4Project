@@ -22,7 +22,12 @@ class ConverterRunner {
         String temp = "";
         System.out.println("\n\nDigit array: " + Arrays.toString(digits));
         System.out.println("Number: " + nc.displayNumber(nc.getDigits()));
-        System.out.println("Binary: " + Arrays.toString(nc.convertToAny(2)));
+        if (base != 2) {
+            System.out.println("Binary: " + Arrays.toString(nc.convertToAny(2)));
+        }
+        if (base != 8) {
+            System.out.println("Binary: " + Arrays.toString(nc.convertToAny(8)));
+        }
         System.out.println("Decimal: "+ Arrays.toString(nc.convertToDecimal(base)));
     }
 }
