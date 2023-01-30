@@ -19,9 +19,10 @@ class ConverterRunner {
 
         NumberConverter nc = new NumberConverter(n, base);
         int[] digits = nc.getDigits();
+        String temp = "";
         System.out.println("\n\nDigit array: " + Arrays.toString(digits));
-        System.out.println("Number: " + nc.displayOriginalNumber());
-        System.out.println("Binary: " + Arrays.toString(nc.convertToBinary()));
-        System.out.println(Math.pow(2, n));
+        System.out.println("Number: " + nc.displayNumber(nc.getDigits()));
+        System.out.println("Binary: " + Arrays.toString(nc.convertToAny(2)));
+        System.out.println("Decimal: "+ Arrays.toString(nc.convertToDecimal(base)));
     }
 }

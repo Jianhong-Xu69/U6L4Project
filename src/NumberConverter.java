@@ -15,10 +15,10 @@ public class NumberConverter {
         this.base = base;
     }
 
-    public int displayOriginalNumber() {
+    public int displayNumber(int[] array) {
         String o = "";
-        for (int i = 0; i < digits.length; i++) {
-            o = o + digits[i];
+        for (int i = 0; i < array.length; i++) {
+            o = o + array[i];
         }
         return Integer.parseInt(o);
     }
@@ -30,48 +30,57 @@ public class NumberConverter {
     //use a temp to store the array?
     //try putting an int separated into array?
     //leftmost element, move right
-    //multiply by respective power of 2 or 8
+    //multiply by respective power
     //add to final
     //???
     //separate into array
-    public int[] convertToDecimal() {
-        int[] digitsTemp = getDigits();
+    public int[] convertToDecimal(int base) {
+        int[] digitsTemp;
         int temp = 0;
-        for (int i = 0; i < digitsTemp.length; i++) {
-            temp += Math.pow(8, digitsTemp[i]-1);
+        int power = 0;
+        int j = 0;
+        for (int i = getDigits().length-1; i >= 0; i--) {
+            temp += getDigits()[i] * Math.pow(base, j);
+            j++;
         }
-
-        return null;
+        j = 0;
+        while (Math.pow(10, power) <= temp){
+            power++;
+        }
+        digitsTemp = new int[power];
+        power--;
+        for (int i = 0; i < digitsTemp.length; i++) {
+            digitsTemp[i] = (int) (temp / Math.pow(10, power));
+            temp -= digitsTemp[i] * (Math.pow(10, power));
+            power--;
+        }
+        return digitsTemp;
     }
 
     //use what base it is
     //start with left most and work across?
 
-    public int[] convertToBinary() {
-        int temp = displayOriginalNumber();
+    public int[] convertToAny(int base) {
+        int temp = displayNumber(digits);
         int power = 0;
-        int[] bin;
-        if (base != 2) {
+        int[] any;
+        if (this.base != base) {
             if (base != 10) {
-                temp = convertToDecimal();
+                temp = displayNumber(convertToDecimal(base));
             }
-            while (Math.pow(2, power) <= displayOriginalNumber()) {
-                power += 1;
+            while (Math.pow(base, power) <= displayNumber(digits)) {
+                power++;
             }
-            bin = new int[power];
-            int i = 0;
-            while (temp > 0) {
-                bin[bin.length-1-i] = temp % 2;
-                temp /= 2;
-                i++;
+            any = new int[power];
+            power--;
+            for (int i = 0; i < any.length; i++) {
+                any[i] = (int) (temp / Math.pow(base,power));
+                System.out.println((int) (temp / Math.pow(base,power)));
+                temp = temp - (int) (Math.pow(base,power));
+                power--;
             }
-            return bin;
-
+            return any;
         }
-        return null;
-    }
-
-    public int[] convertToOctal() {
         return null;
     }
 }
