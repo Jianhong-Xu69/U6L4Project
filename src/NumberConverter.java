@@ -75,8 +75,6 @@ public class NumberConverter {
             power--;
             for (int i = 0; i < any.length; i++) {
                 any[i] = temp / (int) (Math.pow(convertTo,power));
-                System.out.println((int) (temp / Math.pow(convertTo,power)) + " times " + Math.pow(convertTo,power));
-                System.out.println("is" + temp / (Math.pow(convertTo,power)));
                 temp %= (int) (Math.pow(convertTo,power));
                 power--;
             }

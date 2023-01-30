@@ -26,8 +26,10 @@ class ConverterRunner {
             System.out.println("Binary: " + Arrays.toString(nc.convertToAny(2)));
         }
         if (base != 8) {
-            System.out.println("Binary: " + Arrays.toString(nc.convertToAny(8)));
+            System.out.println("Octo: " + Arrays.toString(nc.convertToAny(8)));
         }
-        System.out.println("Decimal: "+ Arrays.toString(nc.convertToDecimal(base)));
+        if (base != 10) {
+            System.out.println("Decimal: "+ Arrays.toString(nc.convertToDecimal(base)));
+        }
     }
 }
