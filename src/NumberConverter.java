@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 public class NumberConverter {
     int[] digits;
     int base;
@@ -15,12 +13,13 @@ public class NumberConverter {
         this.base = base;
     }
 
-    public int displayNumber(int[] array) {
+    public String displayNumber(int[] array) {
         String o = "";
+        String allValues = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
         for (int i = 0; i < array.length; i++) {
-            o += array[i];
+            o += allValues.charAt(array[i]);
         }
-        return Integer.parseInt(o);
+        return o;
     }
 
     public int[] getDigits() {
@@ -34,7 +33,7 @@ public class NumberConverter {
     //add to final
     //???
     //separate into array
-    public int[] convertToDecimal(int base) {
+    public int[] convertToDecimal() {
         int[] digitsTemp;
         int temp = 0;
         int power = 0;
@@ -61,14 +60,12 @@ public class NumberConverter {
     //start with left most and work across?
 
     public int[] convertToAny(int convertTo) {
-        int temp = displayNumber(digits);
+        int temp = Integer.parseInt(displayNumber(digits));
         int power = 0;
         int[] any;
         if (base != convertTo) {
             if (base != 10) {
-                temp = displayNumber(convertToDecimal(base));
-                System.out.println("e");
-                System.out.println(temp);
+                temp = Integer.parseInt(displayNumber(convertToDecimal()));
             }
             while (Math.pow(convertTo, power) <= temp) {
                 power++;

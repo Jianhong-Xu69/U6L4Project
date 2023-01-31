@@ -15,21 +15,23 @@ class ConverterRunner {
         String number = s.nextLine();
         int n = Integer.parseInt(number);
 
-        s.close();
-
         NumberConverter nc = new NumberConverter(n, base);
         int[] digits = nc.getDigits();
         String temp = "";
         System.out.println("\n\nDigit array: " + Arrays.toString(digits));
         System.out.println("Number: " + nc.displayNumber(nc.getDigits()));
         if (base != 2) {
-            System.out.println("Binary: " + Arrays.toString(nc.convertToAny(2)));
+            System.out.println("Binary: " + nc.displayNumber(nc.convertToAny(2)));
         }
         if (base != 8) {
-            System.out.println("Octo: " + Arrays.toString(nc.convertToAny(8)));
+            System.out.println("Octo: " + nc.displayNumber(nc.convertToAny(8)));
         }
         if (base != 10) {
-            System.out.println("Decimal: "+ Arrays.toString(nc.convertToDecimal(base)));
+            System.out.println("Decimal: " + nc.displayNumber(nc.convertToDecimal()));
         }
+        System.out.println("Additional base would you like to convert to (Only scales to base 64): ");
+        choice = s.nextLine();
+        base = Integer.parseInt(choice);
+        System.out.println("Base " + base + ": " + nc.displayNumber(nc.convertToAny(base)));
     }
 }
