@@ -1,13 +1,14 @@
 public class NumberConverter {
-    int[] digits;
-    int base;
+    private int[] digits;
+    private int base;
+    public static final String ALL_VALUES = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
 
-    public NumberConverter(int number, int base) {
-        String numberAsString = Integer.toString(number);
+
+    public NumberConverter(String number, int base) {
+        String numberAsString = number;
         digits = new int[numberAsString.length()];
         for (int i = 0; i < numberAsString.length(); i++) {
-            String single = numberAsString.substring(i, i + 1);
-            int d = Integer.parseInt(single);
+            int d = ALL_VALUES.indexOf(String.valueOf(number.charAt(i)));
             digits[i] = d;
         }
         this.base = base;
@@ -15,9 +16,8 @@ public class NumberConverter {
 
     public String displayNumber(int[] array) {
         String o = "";
-        String allValues = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
         for (int i = 0; i < array.length; i++) {
-            o += allValues.charAt(array[i]);
+            o += ALL_VALUES.charAt(array[i]);
         }
         return o;
     }
@@ -60,12 +60,14 @@ public class NumberConverter {
     //start with left most and work across?
 
     public int[] convertToAny(int convertTo) {
-        int temp = Integer.parseInt(displayNumber(digits));
+        int temp;
         int power = 0;
         int[] any;
         if (base != convertTo) {
             if (base != 10) {
                 temp = Integer.parseInt(displayNumber(convertToDecimal()));
+            } else {
+                temp = Integer.parseInt(displayNumber(digits));
             }
             while (Math.pow(convertTo, power) <= temp) {
                 power++;

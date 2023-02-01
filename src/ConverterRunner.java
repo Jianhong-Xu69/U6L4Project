@@ -5,45 +5,54 @@ class ConverterRunner {
     public static void main(String[] args) {
         System.out.println("Welcome to the Number Converter!");
         System.out.println("--------------------------------");
-        System.out.print("Enter the base of your number (2, 8 or 10): ");
+        System.out.print("Enter the base of your number (Only supports up to base 64): ");
+        int count = 0;
 
         Scanner s = new Scanner(System.in);
         String choice = "";
         int base = 0;
         for (int i = 0; i < 1; i++) {
             choice = s.nextLine();
-            if (choice.equalsIgnoreCase("2") || choice.equalsIgnoreCase("8") || choice.equalsIgnoreCase("10")){
+            if (Integer.parseInt(choice) > 0 && Integer.parseInt(choice) < 65){
                 base = Integer.parseInt(choice);
             } else {
                 System.out.println("That's not valid!");
-                System.out.print("Enter the base of your number (2, 8 or 10): ");
+                count++;
+                if (count == 5){
+                    System.out.println("Were you looking for a secret message or something? If so, here it is.");
+                }
+                System.out.print("Enter the base of your number (Only supports up to base 64): ");
                 i--;
             }
         }
 
-        System.out.print("Enter your number: ");
+        System.out.print("Enter your number (must be positive!): ");
         String number;
-        int n = 0;
-        boolean temp = false;
+        String n = "";
+        boolean temp = true;
         for (int i = 0; i < 1; i++) {
             number = s.nextLine();
-            for (int j = 0; j < number.length()-1; j++) {
-                if (Integer.parseInt(String.valueOf(number.charAt(j))) < base){
-                    temp = true;
+            for (int j = 0; j < number.length(); j++) {
+                if (NumberConverter.ALL_VALUES.indexOf(number.charAt(j)) > base || NumberConverter.ALL_VALUES.indexOf(number.charAt(j)) < 0){
+                    temp = false;
                 }
             }
             if (temp){
-                n = Integer.parseInt(number);
+                n = number;
             } else {
                 System.out.println("That's not valid!");
-                System.out.print("Enter your number: ");
+                count++;
+                if (count == 5){
+                    System.out.println("Were you looking for a secret message or something? If so, here it is.");
+                }
+                System.out.print("Enter your number (must be positive!): ");
                 i--;
+                temp = true;
             }
         }
 
         NumberConverter nc = new NumberConverter(n, base);
         int[] digits = nc.getDigits();
-        String temp2 = "";
         System.out.println("\n\nDigit array: " + Arrays.toString(digits));
         System.out.println("Number: " + nc.displayNumber(nc.getDigits()));
         if (base != 2) {
